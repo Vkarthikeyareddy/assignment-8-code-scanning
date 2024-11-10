@@ -3,32 +3,18 @@ name: CI
 on: [push]
 
 jobs:
-    sast_scan:
-        name: Run Static Code Scan
-        runs-on: ubuntu-latest
-        
-        steps:
-        - name: Checkout code
-            uses: actions/checkout@v2
-            
-        - name: Set up Python
-            uses: actions/setup-python@v2
-            with:
-                python-version: 3.8
-
-name: build
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-jobs:
   sast_scan:
     name: Run Static Code Scan
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
 
       - name: Run Trivy vulnerability scanner in repo mode
         uses: aquasecurity/trivy-action@0.28.0
